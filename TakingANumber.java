@@ -14,46 +14,38 @@ public class TakingANumber
 	public static int askForNumber(String text)
 	{
 		Scanner input = new Scanner(System.in);
-		int numberInt = 0;
 		
+		do {
 		System.out.println(text);
-		String number = input.next();
-		try
-		{
-			return numberInt = Integer.parseInt(number);
-		}
-		catch(NumberFormatException e)
-		{
+		if(input.hasNextInt()){
+			input.nextLine();
+			return number;
+		} else {
+			input.nextLine();
 			System.out.println("\nERROR: your input was not a valid number. Please try again.\n\n");
-			return askForNumber(text);
 		}
+		while(true);
 	}
 	
 	public static int askForNumberInRange(String text, int min, int max)
 	{
 		Scanner input = new Scanner(System.in);
-		int numberInt = 0;
 		
-		System.out.println(text);
-		String number = input.nextLine();
-		try
-		{
-			numberInt = Integer.parseInt(number);
+		do {
+			System.out.println(text);
+			if(input.hasNextInt()){
+				int number = input.nextInt();
+				input.nextLine();
+				if (number >= min && number <= max){
+					return number;	
+				} else {
+					System.out.println("\nERROR: your input is out of range. Please try again.\n\n");
+				}
+			} else {
+				input.nextLine();
+				System.out.println("\nERROR: your input was not a valid number. Please try again.\n\n");
+			}
 		}
-		catch(NumberFormatException e)
-		{
-			System.out.println("\nERROR: your input was not a valid number. Please try again.\n\n");
-			return askForNumberInRange(text, min, max);
-		}
-		
-		if (numberInt > min && numberInt < max)
-		{
-			return numberInt;	
-		}
-		else
-		{
-			System.out.println("\nERROR: your input is out of range. Please try again.\n\n");
-			return askForNumberInRange(text, min, max);
-		}
+		while(true);
 	}
 }
