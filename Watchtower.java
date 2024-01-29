@@ -6,59 +6,51 @@ public class Watchtower
 	{
 		Scanner input = new Scanner(System.in);
 		
-		int xcoordinateInt = askForNumber("\nWhat's the X coordinate?");
-		int ycoordinateInt = askForNumber("\nWhat's the Y coordinate?");
+		int xcoordinate = askForNumber("\nWhat's the X coordinate?");
+		int ycoordinate = askForNumber("\nWhat's the Y coordinate?");
 			
-		String DirectionX = "";
-		String DirectionY = "";
+		String directionX = "";
+		String directionY = "";
 		
-		if (ycoordinateInt == 0 && xcoordinateInt == 0)
+		if (ycoordinate == 0 && xcoordinate == 0)
 		{
-			System.out.println("\nThat's the location of our watchtower you dummy!");
+			System.out.println("\nThe enemy is here!");
 			return;
 		}
 		
 		// x coordinate
-		if(xcoordinateInt > 0)
+		if(xcoordinate > 0)
 		{
-			DirectionX = "east";
+			directionX = "east";
 		}
-		else if (xcoordinateInt < 0)
+		else if (xcoordinate < 0)
 		{
-			DirectionX = "west";
-		}
-		else
-		{
-			DirectionX = "";
+			directionX = "west";
 		}
 		
 		// y coordinate
-		if(ycoordinateInt > 0)
+		if(ycoordinate > 0)
 		{
-			DirectionY = "north";
+			directionY = "north";
 		}
-		else if (ycoordinateInt < 0)
+		else if (ycoordinate < 0)
 		{
-			DirectionY = "south";
-		}
-		else
-		{
-			DirectionY = "";
+			directionY = "south";
 		}
 		
-		System.out.println("The enemy appears to be coming from " + DirectionY + DirectionX);
+		System.out.println("The enemy is to the " + directionY + directionX = "!");
 	}
 	
 	public static int askForNumber(String text)
 	{
 		Scanner input = new Scanner(System.in);
-		int numberInt = 0;
+		int number = 0;
 		
 		System.out.println(text);
-		String number = input.next();
+		String numberAsText = input.next();
 		try
 		{
-			return numberInt = Integer.parseInt(number);
+			return number = Integer.parseInt(numberAsText);
 		}
 		catch(NumberFormatException e)
 		{

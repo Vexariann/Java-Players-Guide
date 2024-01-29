@@ -35,7 +35,7 @@ public class TakingANumber
 		int numberInt = 0;
 		
 		System.out.println(text);
-		String number = input.next();
+		String number = input.nextLine();
 		try
 		{
 			numberInt = Integer.parseInt(number);
