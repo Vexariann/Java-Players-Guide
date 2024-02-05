@@ -1,19 +1,24 @@
 import java.util.Scanner;
 
+/* to do:
+ * cityhealth drain and turn increment should be after win condition check
+ * public functions to private
+ */
+
 public class HuntingManticore
 {
 	
-	public static final String ANSI_RESET = "\u001B[0m";
-	public static final String ANSI_BLACK = "\u001B[30m";
-	public static final String ANSI_RED = "\u001B[31m";
-	public static final String ANSI_GREEN = "\u001B[32m";
-	public static final String ANSI_YELLOW = "\u001B[33m";
-	public static final String ANSI_BLUE = "\u001B[34m";
-	public static final String ANSI_PURPLE = "\u001B[35m";
-	public static final String ANSI_CYAN = "\u001B[36m";
-	public static final String ANSI_WHITE = "\u001B[37m";
+	static final String ANSI_RESET = "\u001B[0m";
+	static final String ANSI_BLACK = "\u001B[30m";
+	static final String ANSI_RED = "\u001B[31m";
+	static final String ANSI_GREEN = "\u001B[32m";
+	static final String ANSI_YELLOW = "\u001B[33m";
+	static final String ANSI_BLUE = "\u001B[34m";
+	static final String ANSI_PURPLE = "\u001B[35m";
+	static final String ANSI_CYAN = "\u001B[36m";
+	static final String ANSI_WHITE = "\u001B[37m";
 	
-	static int manticoreLocation = -9999;
+	static int manticoreLocation = 0;
 	static int cityHealth = 15;
 	static int manticoreHealth = 10;
 	static int currentRound = 1;
@@ -28,20 +33,20 @@ public class HuntingManticore
 		turn();
 	}
 	
-	public static void initializeGame() {
-		manticoreLocation = askForNumberInRange(ANSI_RED + "Oh almighty one, how far away from the city do you want to station the Manticore?" + ANSI_RESET, 0, 100);
+	private static void initializeGame() {
+		manticoreLocation = askForNumberInRange(ANSI_RED + "Oh almighty one, how far away from the city do you want to station the Manticore? The range can be between 0 and 100." + ANSI_RESET, 0, 100);
 		ClearScreen();
 		System.out.println(ANSI_RED + "Defenders, it is your turn. You'll never hit me muahahahaha!" + ANSI_RESET);
 	}
 	
-	public static void turn() {
+	private static void turn() {
 		DetermineCannonDamage();
 		ShowStatus();
-		int target = askForNumberInRange("Enter desired cannon range:", 0, 100);
+		int target = askForNumberInRange("Enter desired cannon range between 0 and 100:", 0, 100);
 		calculateHit(target);
 	}
 	
-	public static void calculateHit(int target) {
+	private static void calculateHit(int target) {
 		if (target > manticoreLocation) {
 			System.out.println("That round " + ANSI_RED + "OVERSHOT" + ANSI_RESET + " the target.");
 		}
@@ -62,7 +67,7 @@ public class HuntingManticore
 		}
 	}
 	
-	public static int askForNumberInRange(String text, int min, int max) {
+	private static int askForNumberInRange(String text, int min, int max) {
 		Scanner input = new Scanner(System.in);
 		
 		do {
@@ -83,19 +88,19 @@ public class HuntingManticore
 		while(true);
 	}
 	
-	public static void ClearScreen() {
+	private static void ClearScreen() {
 		for (int i = 0; i < 50; i++) {
 			System.out.println("");
 		}
 	}
 	
-	public static void ShowStatus() {
+	private static void ShowStatus() {
 		System.out.println("-----------------------------------------------------------");
 		System.out.println("STATUS: " + ANSI_CYAN + " Round: " + ANSI_RESET + currentRound + " " + ANSI_GREEN + "City: " + ANSI_RESET + cityHealth + "/15 " + ANSI_RED + "Manticore: " + ANSI_RESET + manticoreHealth + "/10");
 		System.out.println("The cannon is expected to deal " + ANSI_CYAN + cannonDamage + " damage" + ANSI_RESET + " this round.");
 	}
 	
-	public static void DetermineCannonDamage() {
+	private static void DetermineCannonDamage() {
 		electricCharge++;
 		fireCharge++;
 		
@@ -116,7 +121,7 @@ public class HuntingManticore
 		}
 	}
 	
-	public static boolean CheckWinCondition() {
+	private static boolean CheckWinCondition() {
 		if (manticoreHealth <= 0 || cityHealth <= 0) {
 			if(manticoreHealth <= 0) {
 				System.out.println(ANSI_GREEN + "The Manticore has been destroyed! The city of Consolas has been saved!" + ANSI_RESET);
