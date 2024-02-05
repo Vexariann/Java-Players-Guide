@@ -20,21 +20,19 @@ public class SimulaTest{
 		ChestState chestState = ChestState.OPEN;
 		
 		while(true){
-			// I have a feeling that this string might be redundant, but not sure.
-			String chestStateName = chestState.chestStateLabel;
-			System.out.println("The chest is " + chestStateName + ". What do you want to do?");
+			System.out.println("The chest is " + chestState.chestStateLabel + ". What do you want to do?");
 			String command = input.nextLine();
 			
-			if(chestStateName.equals("open") && command.equals("close")){
+			if(chestState.chestStateLabel.equals("open") && command.equals("close")){
 				chestState = ChestState.CLOSED;
 			}
-			else if(chestStateName.equals("closed") && command.equals("open")){
+			else if(chestState.chestStateLabel.equals("closed") && command.equals("open")){
 				chestState = ChestState.OPEN;
 			}
-			else if(chestStateName.equals("closed") && command.equals("lock")){
+			else if(chestState.chestStateLabel.equals("closed") && command.equals("lock")){
 				chestState = ChestState.LOCKED;
 			}
-			else if(chestStateName.equals("locked") && command.equals("unlock")){
+			else if(chestState.chestStateLabel.equals("locked") && command.equals("unlock")){
 				chestState = ChestState.CLOSED;
 			}
 			else if(command.equals("exit")){
