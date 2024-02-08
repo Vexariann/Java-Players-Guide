@@ -77,12 +77,6 @@ class Soup {
 	public Seasoning seasoning;
 	
 	public Soup(int choice1, int choice2, int choice3){
-		
-		/* Not entirely happy with the solution below. Possible ways to refactor this:
-		 * 1. Set the choices over to enum values before calling new Soup
-		 * 2. look into ways to call enum value based off int rather than using if else statements
-		 */
-		
 		// set foodtype
 		if(choice1 == 1){
 			this.foodTypes = FoodTypes.SOUP;
