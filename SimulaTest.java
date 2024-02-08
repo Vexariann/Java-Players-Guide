@@ -17,7 +17,7 @@ public class SimulaTest{
 	
 	public static void main(String[] args){
 		Scanner input = new Scanner(System.in);
-		ChestState chestState = ChestState.OPEN;
+		ChestState chestState = ChestState.LOCKED;
 		
 		while(true){
 			System.out.println("The chest is " + chestState.chestStateLabel + ". What do you want to do?");
