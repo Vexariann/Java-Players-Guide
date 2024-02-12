@@ -35,9 +35,9 @@ public class VinArrows{
 		double price = calculatePrice(arrow);
 		
 		System.out.println("Your order:");
-		System.out.println("Arrow head: " + arrow.arrowHead.name().toLowerCase());
-		System.out.println("Shaft length: " + arrow.shaftLength + "cm");
-		System.out.println("Fletching: " + arrow.fletching.name().toLowerCase().replace("_", " "));
+		System.out.println("Arrow head: " + arrow.getArrowHead().name().toLowerCase());
+		System.out.println("Shaft length: " + arrow.getShaftLength() + "cm");
+		System.out.println("Fletching: " + arrow.getFletching().name().toLowerCase().replace("_", " "));
 		System.out.println("Your total price will be: " + price + " gold.");
 	}
 	
@@ -54,27 +54,27 @@ public class VinArrows{
 		double price = 0;
 		
 		// get price for ArrowHead
-		if(arrow.arrowHead == ArrowHead.STEEL){
+		if(arrow.getArrowHead() == ArrowHead.STEEL){
 			price = price + 10;
 		}
-		else if(arrow.arrowHead == ArrowHead.WOOD){
+		else if(arrow.getArrowHead() == ArrowHead.WOOD){
 			price = price + 3;
 		} else {
 			price = price + 5;
 		}
 		
 		// get price for Fletching
-		if(arrow.fletching == Fletching.PLASTIC){
+		if(arrow.getFletching() == Fletching.PLASTIC){
 			price = price + 10;
 		}
-		else if(arrow.fletching == Fletching.TURKEY_FEATHERS){
+		else if(arrow.getFletching() == Fletching.TURKEY_FEATHERS){
 			price = price + 5;
 		} else {
 			price = price + 3;
 		}
 		
 		// get price for shaftLength
-		price = price + (arrow.shaftLength * 0.05);
+		price = price + (arrow.getShaftLength() * 0.05);
 		
 		return price;
 	}
@@ -103,13 +103,25 @@ public class VinArrows{
 }
 
 class Arrow{
-	ArrowHead arrowHead;
-	int shaftLength;
-	Fletching fletching;
+	private final ArrowHead arrowHead;
+	private final int shaftLength;
+	private final Fletching fletching;
 	
 	public Arrow(ArrowHead arrowHeadSelection, int shaftLengthSelection, Fletching fletchingSelection){
 		arrowHead = arrowHeadSelection;
 		shaftLength = shaftLengthSelection;
 		fletching = fletchingSelection;
+	}
+	
+	public ArrowHead getArrowHead() {
+		return arrowHead;
+	}
+	
+	public int getShaftLength() {
+		return shaftLength;
+	}
+	
+	public Fletching getFletching() {
+		return fletching;
 	}
 }
