@@ -11,6 +11,9 @@ public class TheColor{
 	public static void main(String[] args){
 		Color color1 = new Color(150,0,255);
 		System.out.println("Your own color: " + color1.getRed() + " " + color1.getGreen() + " " + color1.getBlue());
+		
+		Color color2 = Orange;
+		System.out.println("Premade color: " + color2.getRed() + " " + color2.getGreen() + " " + color2.getBlue());
 	}
 }
 
