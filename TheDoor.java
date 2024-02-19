@@ -25,7 +25,21 @@ public class TheDoor{
 				if(askForPassCode(door) == true){
 					int newPassCode = checkForInt("\nSet your new 4 digit passcode: ", 0000, 9999);
 					door.setPassCode(newPassCode);
-					System.out.println("Your new passCode is: " + newPassCode);
+					
+					//convert the new passcode int to string and checks it's length so it can properly display the passcode as a 4 digit number in the console. For example 0001
+					String newPassCodeString = Integer.toString(newPassCode);
+					int newPassCodeLength = newPassCodeString.length();
+					switch(newPassCodeLength){
+						case 1:
+							newPassCodeString = "000" + newPassCodeString;
+							break;
+						case 2:
+							newPassCodeString = "00" + newPassCodeString;
+							break;
+						case 3:
+							newPassCodeString = "0" + newPassCodeString;
+					}		
+					System.out.println("Your new passCode is: " + newPassCodeString);
 				}
 			} else {
 				checkInput(input, door);
