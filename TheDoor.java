@@ -9,7 +9,7 @@ enum DoorState{
 
 public class TheDoor{
 	public static void main(String[] args){
-		int randomPassCode = ThreadLocalRandom.current().nextInt(1000, 9999);
+		int randomPassCode = ThreadLocalRandom.current().nextInt(0000, 9999);
 		System.out.println("DEBUG: Your randomly generated passcode: " + randomPassCode);
 		
 		Scanner sc = new Scanner(System.in);
@@ -23,9 +23,9 @@ public class TheDoor{
 			} 
 			else if(input.toLowerCase().equals("iwanttochangemypasscode")){
 				if(askForPassCode(door) == true){
-					int newPassCode = checkForInt("\nSet your new 4 digit passcode: ", 1000, 9999);
+					int newPassCode = checkForInt("\nSet your new 4 digit passcode: ", 0000, 9999);
 					door.setPassCode(newPassCode);
-					System.out.println("Your new passCode is: " + door.getPassCode());
+					System.out.println("Your new passCode is: " + newPassCode);
 				}
 			} else {
 				checkInput(input, door);
@@ -37,24 +37,19 @@ public class TheDoor{
 	public static void checkInput(String command, Door door){
 		if(door.getDoorState() == DoorState.OPEN && command.toLowerCase().equals("close")){
 			door.setDoorState(DoorState.CLOSED);
-			return;
 		} 
 		else if(door.getDoorState() == DoorState.CLOSED && command.toLowerCase().equals("open")){
 			door.setDoorState(DoorState.OPEN);
-			return;
 		}
 		else if(door.getDoorState() == DoorState.CLOSED && command.toLowerCase().equals("lock")){
 			door.setDoorState(DoorState.LOCKED);
-			return;
 		}
 		else if(door.getDoorState() == DoorState.LOCKED && command.toLowerCase().equals("unlock")){
 			if(askForPassCode(door) == true){
 				door.setDoorState(DoorState.CLOSED);
-				return;
 			}
 		} else {
 			System.out.println("Your command was not valid. Please try again.");
-			return;
 		}
 	}
 	
@@ -62,15 +57,9 @@ public class TheDoor{
 		
 		Scanner sc = new Scanner(System.in);
 			
-		int codeInput = checkForInt("It appears the door has a secret passcode, please fill in a 4 numeric number", 1000, 9999);
+		int codeInputAsNumber = checkForInt("It appears the door has a secret passcode, please fill in a 4 numeric number", 0000, 9999);
 		
-		if(codeInput == door.getPassCode()){
-			System.out.println("Correct passcode!");
-			return true;
-		} else {
-			System.out.println("That is not the correct passcode!");
-			return false;
-		}
+		return door.checkPassCode(codeInputAsNumber);
 	}
 	
 	public static int checkForInt(String prompt, int min, int max){
@@ -79,21 +68,39 @@ public class TheDoor{
 		
 		while (true){
 			System.out.println(prompt);
-			if(sc.hasNextInt()){
-				int number = sc.nextInt();
-				sc.nextLine();
+			if(sc.hasNextLine()){
+				
+				String numberInput = sc.nextLine();
+				
+				if(!isValidNumber(numberInput)){
+					System.out.println("ERROR: input is not a number, please try again!");
+					continue;
+				}
+				
+				if(numberInput.length() != 4){
+					System.out.println("ERROR: your input does not meet the required length, please try again.");
+					continue;
+				}
+
+				int number = Integer.parseInt(numberInput);
+				
 				if (number >= min && number <= max){
 					return number;	
-				} else {
-					System.out.println("ERROR: your input is out of range. Please try again.");
-				}
-			} else {
-				sc.nextLine();
-				System.out.println("ERROR: input is not a number, please try again!");
+				} 
 			}
 		}
 	}
+	
+	public static boolean isValidNumber(String input){
+		for(char c : input.toCharArray()){
+			if(!Character.isDigit(c)){
+				return false;
+			}
+		}
+		return true;
+	}
 }
+
 
 class Door{
 	private DoorState doorState;
@@ -116,7 +123,13 @@ class Door{
 		return doorState;
 	}
 	
-	public int getPassCode(){
-		return passCode;
+	public boolean checkPassCode(int input){
+		if(input == passCode){
+			System.out.println("Correct passcode!");
+			return true;
+		} else {
+			System.out.println("That is not the correct passcode!");
+			return false;
+		}
 	}
 }
