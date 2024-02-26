@@ -60,7 +60,7 @@ public class TheDoor{
 	
 	public static boolean askForPassCode(Door door){
 			
-		int codeInputAsNumber = checkForInt("It appears the door has a secret passcode, please fill in a number between 1 and 10000", 0000, 9999);
+		int codeInputAsNumber = checkForInt("It appears the door has a secret passcode, please fill in a number between 1 and 10000", 0, 9999);
 		
 		return door.checkPassCode(codeInputAsNumber);
 	}
