@@ -4,8 +4,15 @@ public class PasswordValidator{
 	public static void main(String[] args){
 		Scanner sc = new Scanner(System.in);
 		
-		String input = sc.nextLine();
-		validatePassword(input);
+		while(true){
+			System.out.println("\nCheck if your password meets the requirements.");
+			String input = sc.nextLine();
+			if(input.equals("exit")){
+				break;
+			} else {
+				validatePassword(input);
+			}
+		}
 	}
 	
 	public static void validatePassword(String password){
