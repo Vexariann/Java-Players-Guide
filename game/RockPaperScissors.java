@@ -73,32 +73,25 @@ public class RockPaperScissors{
 	}
 	
 	public static int compareInputs(GameAction player1Action, GameAction player2Action){
-		// nested else statement is redundant, if none of these checks pass player 1 wins guaranteed.
 		if (player1Action == player2Action){
 			return 0;
 		}		
 		if (player1Action == GameAction.ROCK){
 			if(player2Action == GameAction.PAPER){
 				return 2;
-			} else {
-				return 1;
 			}
 		}
 		if (player1Action == GameAction.PAPER){
 			if(player2Action == GameAction.SCISSORS){
 				return 2;
-			} else {
-				return 1;
 			}
 		}
 		if(player1Action == GameAction.SCISSORS){
 			if(player2Action == GameAction.ROCK){
 				return 2;
-			} else {
-				return 1;
 			}
 		}
-		return 0;
+		return 1;
 	}
 	
 	private static GameAction setAction(Player currentPlayer){
@@ -118,24 +111,14 @@ public class RockPaperScissors{
 				selection = askForNumber();
 			}
 			
-			// look at switch statement
-			// if (selection == 1){
-				// return GameAction.ROCK;
-			// }
-			// else if (selection == 2){
-				// return GameAction.PAPER;
-			// }
-			// else if (selection == 3){
-				// return GameAction.SCISSORS;
-			// } else {
-				// System.out.println("Invalid action!");
-			// }
-			
 			GameAction gameAction = switch(selection){
-				case 1: gameAction = GameAction.ROCK;
-				case 2: gameAction = GameAction.PAPER;
-				case 3: gameAction = GameAction.SCISSORS;
+				case 1 -> GameAction.ROCK;
+				case 2 -> GameAction.PAPER;
+				case 3 -> GameAction.SCISSORS;
+				default -> null;
 			};
+			
+			if(gameAction == null){ continue; }
 			
 			return gameAction;
 			
