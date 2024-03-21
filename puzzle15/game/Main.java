@@ -8,5 +8,6 @@ public class Main{
 	public static void generateNewGame(){
 		GameLogic gameLogic = new GameLogic();
 		gameLogic.generateGame();
+		gameLogic.turn();
 	}
 }
