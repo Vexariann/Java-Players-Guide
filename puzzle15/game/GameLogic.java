@@ -96,6 +96,16 @@ public class GameLogic{
 		}
 		else if (command.equalsIgnoreCase("quit")){
 			System.exit(0);
+		} 
+		else if (command.equalsIgnoreCase("help")){
+			System.out.println("Available commands:");
+			System.out.println("up - moves the empty space one tile up");
+			System.out.println("down - moves the empty space one tile down");
+			System.out.println("left - moves the empty space one tile left");
+			System.out.println("right - moves the empty space one tile right");
+			System.out.println("help - shows this menu");
+			System.out.println("quit - quits the game");
+			System.out.println("");
 		} else {
 			System.out.println("Invalid command, please try again!");
 		}
