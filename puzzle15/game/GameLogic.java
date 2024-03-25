@@ -135,8 +135,7 @@ public class GameLogic{
 			board.get(newyCoordinate).set(newxCoordinate, 0);
 			currentxCoordinate = newxCoordinate;
 			currentyCoordinate = newyCoordinate;
-		}
-		catch (Exception ex){
+		} catch (Exception ex){
 			if (!isAutoGenerating){System.out.println("Cannot move outside of the playing field!");}
 			newxCoordinate = currentxCoordinate;
 			newyCoordinate = currentyCoordinate;
@@ -145,7 +144,6 @@ public class GameLogic{
 	}
 	
 	private boolean checkWinCondition(){
-		if(board.get(0).equals(finalBoard.get(0)) && board.get(1).equals(finalBoard.get(1)) && board.get(2).equals(finalBoard.get(2)) && board.get(3).equals(finalBoard.get(3))){return true;}
-		return false;
+		return(board.equals(finalBoard));
 	}
 }
